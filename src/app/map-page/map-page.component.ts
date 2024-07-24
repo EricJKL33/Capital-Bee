@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CapitalService, Capital } from '../services/capital.service';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { environment } from '../../environments/environment.development';
+import { GoogleMapsLoaderService } from '../services/google-maps-loader.service';
 
 @Component({
   selector: 'app-map-page',
@@ -16,12 +18,17 @@ export class MapPageComponent implements OnInit {
   selectedCapital: Capital | null = null;
   userPosition: google.maps.LatLngLiteral | null = null;
 
-  constructor(private capitalService: CapitalService) {}
+  constructor(
+    private capitalService: CapitalService,
+    private googleMapsLoaderService: GoogleMapsLoaderService
+  ) {}
 
   ngOnInit() {
-    this.getUserLocation();
-    this.capitalService.getCapitals().subscribe((capitals) => {
-      this.capitals = capitals;
+    this.googleMapsLoaderService.loadAPI().then(() => {
+      this.getUserLocation();
+      this.capitalService.getCapitals().subscribe((capitals) => {
+        this.capitals = capitals;
+      });
     });
   }
 
