@@ -1,0 +1,36 @@
+google-map {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  map-marker {
+    &::after {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  map-info-window {
+    h3 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #333;
+      margin: 3px 0 3px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin: 3px 0 3px;
+    }
+  }
+}

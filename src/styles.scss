@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Magra", sans-serif;
+}
+
+.map-container {
+  width: 700px !important;
+  height: 620px !important;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.gm-style-iw-ch {
+  padding: 0;
+  margin: 0;
+}
+
+.gm-ui-hover-effect {
+  height: 30px !important;
+}

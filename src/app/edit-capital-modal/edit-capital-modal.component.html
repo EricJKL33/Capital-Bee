@@ -1,0 +1,85 @@
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Edit Capital</h3>
+    <ng-container *ngIf="capital">
+      <form #capitalForm="ngForm">
+        <div class="form-group">
+          <label>
+            Country
+            <input
+              [(ngModel)]="capital.country"
+              name="country"
+              placeholder="Country"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            City
+            <input
+              [(ngModel)]="capital.city"
+              name="city"
+              placeholder="City"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Population
+            <input
+              [(ngModel)]="capital.population"
+              name="population"
+              type="number"
+              placeholder="Population"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Latitude
+            <input
+              [(ngModel)]="capital.lat"
+              name="lat"
+              type="number"
+              placeholder="Latitude"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Longitude
+            <input
+              [(ngModel)]="capital.lng"
+              name="lng"
+              type="number"
+              placeholder="Longitude"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Picture URL
+            <input
+              [(ngModel)]="capital.pictureUrl"
+              name="pictureUrl"
+              placeholder="Picture URL"
+            />
+          </label>
+        </div>
+        <button
+          type="button"
+          (click)="save()"
+          [disabled]="!capitalForm.form.valid"
+        >
+          Save
+        </button>
+      </form>
+    </ng-container>
+  </div>
+</div>

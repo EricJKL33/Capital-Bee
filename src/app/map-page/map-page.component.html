@@ -1,0 +1,27 @@
+<google-map [center]="center" [zoom]="zoom">
+  <map-marker
+    *ngFor="let capital of capitals"
+    [position]="{ lat: capital.lat, lng: capital.lng }"
+    (mapClick)="openInfoWindow(marker, capital)"
+    #marker="mapMarker"
+  ></map-marker>
+
+  <map-info-window>
+    <div *ngIf="selectedCapital">
+      <h3>{{ selectedCapital.city }}</h3>
+      <p>Population: {{ selectedCapital.population }}</p>
+      <img
+        [src]="selectedCapital.pictureUrl"
+        alt="{{ selectedCapital.city }}"
+        width="100"
+        height="100"
+      />
+    </div>
+  </map-info-window>
+
+  <map-marker
+    *ngIf="userPosition"
+    [position]="userPosition"
+    icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+  ></map-marker>
+</google-map>

@@ -1,0 +1,44 @@
+<section class="capital-list-ctn">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>City</th>
+        <th>Population</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let capital of capitals">
+        <td>{{ capital.country }}</td>
+        <td>{{ capital.city }}</td>
+        <td>{{ capital.population }}</td>
+        <td>{{ capital.lat }}</td>
+        <td>{{ capital.lng }}</td>
+        <td>
+          <button (click)="editCapital(capital)">Edit</button>
+          <button (click)="deleteCapital(capital.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="add-capital-btn" (click)="openAddModal()">
+    Add New Capital
+  </button>
+
+  <app-add-capital-modal
+    *ngIf="isAddModalVisible"
+    (saveCapital)="saveNewCapital($event)"
+    (close)="closeModal()"
+  ></app-add-capital-modal>
+
+  <app-edit-capital-modal
+    *ngIf="isEditModalVisible"
+    [capital]="editingCapital"
+    (saveCapital)="saveCapital()"
+    (close)="closeModal()"
+  ></app-edit-capital-modal>
+</section>
