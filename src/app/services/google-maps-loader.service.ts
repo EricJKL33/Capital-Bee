@@ -1,44 +1,27 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleMapsLoaderService {
-  private isLoaded = false;
-  private loadPromise: Promise<void> | null = null;
+  private loaded = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-
-  load(): Promise<void> {
-    if (this.isLoaded) {
-      return Promise.resolve();
-    }
-
-    if (!isPlatformBrowser(this.platformId)) {
-      return Promise.reject('Not running in the browser');
-    }
-
-    if (this.loadPromise) {
-      return this.loadPromise;
-    }
-
-    this.loadPromise = new Promise((resolve, reject) => {
+  loadAPI(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (this.loaded) {
+        resolve();
+        return;
+      }
+      console.log(environment.googleMapsApiKey);
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}`;
-      script.async = true;
-      script.defer = true;
       script.onload = () => {
-        this.isLoaded = true;
+        this.loaded = true;
         resolve();
       };
-      script.onerror = (error) => {
-        reject(error);
-      };
-      document.head.appendChild(script);
+      script.onerror = (error) => reject(error);
+      document.body.appendChild(script);
     });
-
-    return this.loadPromise;
   }
 }
